@@ -15,28 +15,25 @@ namespace ConsoleUI
             BrandTest();
             Console.WriteLine("Color Test");
 
+            ColorTest();
+
+        }
+
+        private static void ColorTest()
+        {
             ColorManager colorManager = new ColorManager(new EfColorDal());
-            foreach (var color in colorManager.GetAll())
+            foreach (var color in colorManager.GetAll().Data)
             {
                 Console.WriteLine(color.ColorName);
             }
-            foreach (var color in colorManager.GetById(1))
-            {
-                Console.WriteLine(color.ColorName);
-            }
-
-
+            Console.WriteLine(colorManager.GetById(1).Data.ColorName);
         }
 
         private static void BrandTest()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
 
-            foreach (var brand in brandManager.GetAll())
-            {
-                Console.WriteLine(brand.BrandName);
-            }
-            foreach (var brand in brandManager.GetById(1))
+            foreach (var brand in brandManager.GetAll().Data)
             {
                 Console.WriteLine(brand.BrandName);
             }
@@ -45,18 +42,11 @@ namespace ConsoleUI
         private static void CarTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarDetailDtos())
+            foreach (var car in carManager.GetCarDetails().Data)
             {
                 Console.WriteLine(car.CarId + "/" + car.BrandName + "/" + car.ColorName + "/" + car.DailyPrice + "/" + car.ModelYear);
             }
-            foreach (var car in carManager.GetCarsByBrandId(1))
-            {
-                Console.WriteLine("CarId : {0}--- BrandId : {1}", car.CarId, car.BrandId);
-            }
-            foreach (var car in carManager.GetCarsByColorId(2))
-            {
-                Console.WriteLine("CarId : {0}--- ColorId : {1}", car.CarId, car.ColorId);
-            }
+
         }
     }
 }

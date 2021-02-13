@@ -38,4 +38,32 @@ VALUES
 		(3,'SİYAH'),
 		(4,'GRİ');
 
-Select * from Cars
+CREATE TABLE Users(
+	UserId int PRIMARY KEY IDENTITY(1,1),
+	FirstName nvarchar(255),
+	LastName nvarchar(255),
+	Email nvarchar(255),
+	Password nvarchar(255),
+)
+
+CREATE TABLE Customers(
+	CustomerId int PRIMARY KEY IDENTITY(1,1),
+	UserId int,
+	CompanyName nvarchar(255),
+	FOREIGN KEY(UserId) REFERENCES Users(UserId)
+)
+
+CREATE TABLE RentAls(
+	RentAlId int PRIMARY KEY IDENTITY(1,1),
+	CarId int,
+	CustomerId int,
+	RentDate datetime,
+	ReturnDate datetime,
+	FOREIGN KEY (CarId) REFERENCES Cars(CarId),
+	FOREIGN KEY (CustomerId) REFERENCES Customers(CustomerId)
+)
+
+Select * from Users
+
+
+
